@@ -26,8 +26,8 @@ include_calendarmatrix = 0   # experimental
 
 # order (1 = on, 0 = off):
 # Soren Kierkegaard: Life can only be understood backwards; but it must be lived forwards.
-reversemonth = 1  # 0 = Jan to Dec, 1 = Dec to Jan
-reverseday = 1    # 0 = Mon to Sun, 1 = Sun to Mon
+reversemonth = 0  # 0 = Jan to Dec, 1 = Dec to Jan
+reverseday = 0    # 0 = Mon to Sun, 1 = Sun to Mon
 
 # set first day of week:
 # calendar.setfirstweekday(calendar.SUNDAY)
@@ -56,10 +56,20 @@ def keys():
 def createday(day):
     """ Create list of days with date and weekday """
     mydate = datetime.date(year, month, day)  #year, month, day
-    datedate = mydate.strftime("%Y-%m-%d %A")
+    datedate = mydate.strftime("%d-%m-%Y %A")
     message = '### {}'.format(datedate)
-    print(message)
     print('-' * (len(message)))  # line under name
+    print(message)
+    print
+    print("#### What is my most important task today?")
+    print("1.")
+    print("2.")
+    print("3.")
+    print
+    print("#### What am I grateful for today?")
+    print("1.")
+    print("2.")
+    print("3.")
     print
 
 
