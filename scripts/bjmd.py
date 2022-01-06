@@ -23,11 +23,12 @@ year = now.year
 # include (1 = on, 0 = off):
 include_keys = 1 
 include_calendarmatrix = 0   # experimental
+include_timeblocks = 1         # hourly schedule slots (00:00–23:00)
 
 # order (1 = on, 0 = off):
 # Soren Kierkegaard: Life can only be understood backwards; but it must be lived forwards.
-reversemonth = 1  # 0 = Jan to Dec, 1 = Dec to Jan
-reverseday = 1    # 0 = Mon to Sun, 1 = Sun to Mon
+reversemonth = 0  # 0 = Jan to Dec, 1 = Dec to Jan
+reverseday = 0    # 0 = Mon to Sun, 1 = Sun to Mon
 
 # set first day of week:
 # calendar.setfirstweekday(calendar.SUNDAY)
@@ -50,26 +51,37 @@ def keys():
     w  waiting for [person | circumstance]
 
 """
-       print key_str
+       print(key_str)
+
+
+def timeblocks():
+    """ Add empty hourly slots for the day """
+    if include_timeblocks:
+        print("#### Time blocks")
+        for hour in range(24):
+            print("- {:02d}:00 - ".format(hour))
+        print()
 
 
 def createday(day):
     """ Create list of days with date and weekday """
     mydate = datetime.date(year, month, day)  #year, month, day
-    datedate = mydate.strftime("%Y-%m-%d %A")
+    datedate = mydate.strftime("%d-%m-%Y %A")
     message = '### {}'.format(datedate)
-    print(message)
     print('-' * (len(message)))  # line under name
-    print
+    print(message)
+    print()
+    timeblocks()
+    print()
 
 
 def createmonth(month):
     """ Create short list of days of month """
     mymonth = datetime.date(year, month, 1)  #year, month, day
-    print
-    print '##',mymonth.strftime("%B")
+    print()
+    print('##', mymonth.strftime("%B"))
     # print('-' * (len(mymonth.strftime("%B"))))  # line under name
-    print
+    print()
 
     if include_calendarmatrix:
        print(calendar.month(year, month,10,1))  # matrix of month (coloumn distance, lines)
@@ -81,7 +93,7 @@ def createmonth(month):
        datedate = mydate.strftime("%d %a")
        message = '{}{}{}'.format(prefix, datedate, suffix)
        print(message)
-    print
+    print()
 
     if reverseday:
        for day in range(maxdays, 0, -1):
@@ -90,13 +102,13 @@ def createmonth(month):
        for day in range(1,maxdays+1):
           createday(day)
 
-    print
+    print()
 
 
 # WORKFLOW:
 
 # create calendar and list of days for each month of year:
-print '#',year
+print('#', year)
 
 if include_keys:
    keys()
