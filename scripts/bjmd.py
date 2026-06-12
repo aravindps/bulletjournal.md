@@ -71,7 +71,16 @@ def createday(day):
     print('-' * (len(message)))  # line under name
     print(message)
     print()
+    print("#### What is my most important task today?")
+    print("1.")
+    print("2.")
+    print("3.")
+    print()
     timeblocks()
+    print("#### What am I grateful for today?")
+    print("1.")
+    print("2.")
+    print("3.")
     print()
 
 
